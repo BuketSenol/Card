@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block main %}
+<main>
+    <div class="container">
+        <!-- CARDS -->
+        <div class="row my-5">
+            <div class="row col-9 mt-4">
+                <h3>Kartlar</h3>
+                {% for i in cards %}
+                <div class="col-6 ">
+                    <div class="card mb-4">
+                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">  
+                          <img style="width: 100%; height:250px; object-fit: cover;" src="{{ i.image.url }}" class="img-fluid"/>
+                          <a href="/detail/{{ i.id }}">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                          </a>
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title">{{ i.title }}</h5>
+                          <p class="card-text">{{ i.text |truncatechars:"120" }}</p>
+                          <div class="card-text d-flex justify-content-between mb-3">
+                           
+                           {% if i.category.title == "flower" %}
+                           <strong class="text-danger fw-5">Bizden size hediye</strong>
+                           
+                           {% else %}
+                           <strong class=" fw-5 text-success">₺{{ i.price }}</strong>
+                           {% endif %}
+                            
+                                
+                            <small class="text-muted">{{ i.date_now }}</small>
+                          </div>
+                          <a href="#!" class="btn btn-primary">Button</a>
+                        </div>
+                      </div>
+                </div>
+                    
+                {% endfor %}
+            </div>
+
+            <!-- CATEGORY -->
+            <div class="col-3">
+                <h3>Kategori</h3>
+                
+                <ol class="list-group list-group-light list-group-numbered">
+                    {% for i in category %}
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                      <a href="/category/{{ i.title }}" class="ms-2 me-auto">
+                        <img width="70px" src="{{ i.image.url }}" alt="">
+                        <div class="fw-bold">{{ i.title }}</div>
+                      </a>
+                      <span class="badge badge-primary rounded-pill">14</span>
+                    </li>
+                    {% endfor %}
+                  </ol>
+                    
+                    
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock main %}
+    
+
+    
+
+   
